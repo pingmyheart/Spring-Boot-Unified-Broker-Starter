@@ -48,4 +48,9 @@ public class RabbitMQRegister implements Register {
 
         rabbitListenerEndpointRegistry.registerListenerContainer(endpoint, rabbitListenerContainerFactory, true);
     }
+
+    @Override
+    public BrokerEnum responsibilityBrokerType() {
+        return BrokerEnum.RABBIT_MQ;
+    }
 }

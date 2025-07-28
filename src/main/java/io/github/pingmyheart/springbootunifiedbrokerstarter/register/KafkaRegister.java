@@ -35,10 +35,12 @@ public class KafkaRegister implements Register {
     public void doRegister(ApplicationContext applicationContext,
                            Object bean,
                            Method method) {
+        log.info("Trying to register Kafka listener for method: {}", method.getName());
         EventListenerRegister annotation = method.getAnnotation(EventListenerRegister.class);
         if (!annotation.brokerType().equals(BrokerEnum.KAFKA)) {
             return;
         }
+        log.info("Registering Kafka listener for method: {}", method.getName());
         String topic = annotation.topic();
         String groupId = annotation.groupId();
 
@@ -52,5 +54,11 @@ public class KafkaRegister implements Register {
         endpoint.setBeanFactory(applicationContext);
 
         kafkaListenerEndpointRegistry.registerListenerContainer(endpoint, kafkaListenerContainerFactory, true);
+        log.info("Kafka listener registered for topic: {}, groupId: {}", topic, groupId);
+    }
+
+    @Override
+    public BrokerEnum responsibilityBrokerType() {
+        return BrokerEnum.KAFKA;
     }
 }

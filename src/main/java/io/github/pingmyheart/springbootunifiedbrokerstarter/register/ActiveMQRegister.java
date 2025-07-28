@@ -54,4 +54,9 @@ public class ActiveMQRegister implements Register {
 
         jmsListenerEndpointRegistry.registerListenerContainer(endpoint, factory, true);
     }
+
+    @Override
+    public BrokerEnum responsibilityBrokerType() {
+        return BrokerEnum.ACTIVE_MQ;
+    }
 }

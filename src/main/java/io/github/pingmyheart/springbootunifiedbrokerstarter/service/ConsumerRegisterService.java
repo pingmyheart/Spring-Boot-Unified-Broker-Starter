@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class ProducerRegisterService implements ApplicationContextAware, InitializingBean {
+public class ConsumerRegisterService implements ApplicationContextAware, SmartInitializingSingleton {
     private final List<Register> registers;
     private ApplicationContext applicationContext;
 
@@ -30,7 +30,7 @@ public class ProducerRegisterService implements ApplicationContextAware, Initial
     }
 
     @Override
-    public void afterPropertiesSet() {
+    public void afterSingletonsInstantiated() {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(Component.class);
         beans.values().forEach(bean -> {
             Class<?> targetClass = AopUtils.getTargetClass(bean);

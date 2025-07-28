@@ -29,7 +29,7 @@ public class OnBrokerCondition implements Condition {
                 .get("brokerType");
 
         List<BrokerEnum> brokers = Binder.get(context.getEnvironment())
-                .bind("io.github.pingmyheart.springboot-unified-broker.enabled-brokers", Bindable.listOf(BrokerEnum.class))
+                .bind("io.github.pingmyheart.springboot-unified-broker-starter.enabled-brokers", Bindable.listOf(BrokerEnum.class))
                 .orElse(Collections.emptyList());
 
         boolean match = brokers.contains(featureName);

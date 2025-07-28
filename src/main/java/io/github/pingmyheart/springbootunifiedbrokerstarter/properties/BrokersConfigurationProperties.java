@@ -12,7 +12,7 @@ import java.util.List;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "io.github.pingmyheart.springboot-unified-broker")
+@ConfigurationProperties(prefix = "io.github.pingmyheart.springboot-unified-broker-starter")
 @Slf4j
 public class BrokersConfigurationProperties {
     private List<BrokerEnum> enabledBrokers = Collections.emptyList();
